@@ -1,5 +1,6 @@
+;
 "use strict";
-class CardList {
+export class CardList {
   constructor(place, template, popupCard, callback, api) {
     this.place = place;
     this.popupCard = popupCard;
@@ -11,7 +12,7 @@ class CardList {
   //Метод добавления карточки
   addCard = (name, link, id, owner, likes) => {
     const data = { name, link, id, owner, likes };
-    const card = this.callback(data, this.popupCard, this.template, api);
+    const card = this.callback(data, this.popupCard, this.template, this.api);
     this.place.appendChild(card);
   };
 

@@ -1,3 +1,14 @@
+import {Api} from './Api';
+import {Card} from './Card';
+import {CardList} from './CardList';
+
+import {FormValidator} from './FormValidation';
+import {Popup} from './Popup';
+import {PopupImage} from './PopupImage';
+import {UserInfo} from './UserInfo';
+
+
+import '../pages/index.css';
 "use strict";
 const templateCard = document
   .querySelector("#template-card")
@@ -30,8 +41,9 @@ const cardButton = document.querySelector(".user-info__button");
 const avatarButton = document.querySelector(".user-info__photo");
 
 //Переменные для классов
+const API_URL = NODE_ENV === 'production' ? 'https://praktikum.tk' : 'http://praktikum.tk';
 const api = new Api({
-  baseUrl: "https://praktikum.tk/cohort11",
+  baseUrl: `${API_URL}/cohort11`,
   headers: {
     authorization: "6f8e26e1-ac20-463f-a9ab-2e1466225421",
     "Content-Type": "application/json",

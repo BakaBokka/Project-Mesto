@@ -1,5 +1,5 @@
 "use strict";
-class Popup {
+export class Popup {
   constructor(popupContainer) {
     this.popupContainer = popupContainer;
     this.form = this.popupContainer.querySelector(".popup__form");

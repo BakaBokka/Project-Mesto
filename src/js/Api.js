@@ -1,5 +1,5 @@
 "use strict";
-class Api {
+export class Api {
   constructor(options) {
     this.options = options;
   }
