@@ -1,5 +1,6 @@
+import {errorMessages} from './data';
 "use strict";
-class FormValidator {
+export class FormValidator {
   constructor(form) {
     this.form = form;
     this.submitButton = this.form.querySelector(".popup__button");

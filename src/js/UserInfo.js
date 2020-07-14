@@ -1,5 +1,5 @@
 "use strict";
-class UserInfo {
+export class UserInfo {
   constructor(nameInput, dataInput, userData, api) {
     this.nameInput = nameInput;
     this.dataInput = dataInput;

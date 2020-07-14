@@ -1,5 +1,6 @@
+import {Popup} from './Popup';
 "use strict";
-class PopupImage extends Popup {
+export class PopupImage extends Popup {
   constructor(popupContainer) {
     super(popupContainer);
   }
