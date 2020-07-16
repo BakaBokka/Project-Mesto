@@ -1,0 +1,11 @@
+.popup__likes-content {
+  max-width: 100%;
+  width: fit-content;
+  background-color: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 34px 36px;
+  column-count: 2;
+
+  /* column-rule: 1px solid #ccc; */
+}

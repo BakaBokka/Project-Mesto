@@ -1,15 +1,14 @@
-import {Api} from './Api';
-import {Card} from './Card';
-import {CardList} from './CardList';
+import { Api } from "./Api";
+import { Card } from "./Card";
+import { CardList } from "./CardList";
+import { FormValidator } from "./FormValidation";
+import { Popup } from "./Popup";
+import { PopupImage } from "./PopupImage";
+import { PopupLikes} from "./PopupLikes";
+import { UserInfo } from "./UserInfo";
+import "../pages/index.css";
 
-import {FormValidator} from './FormValidation';
-import {Popup} from './Popup';
-import {PopupImage} from './PopupImage';
-import {UserInfo} from './UserInfo';
-
-
-import '../pages/index.css';
-"use strict";
+("use strict");
 const templateCard = document
   .querySelector("#template-card")
   .content.querySelector(".place-card");
@@ -41,7 +40,8 @@ const cardButton = document.querySelector(".user-info__button");
 const avatarButton = document.querySelector(".user-info__photo");
 
 //Переменные для классов
-const API_URL = NODE_ENV === 'production' ? 'https://praktikum.tk' : 'http://praktikum.tk';
+const API_URL =
+  NODE_ENV === "production" ? "https://praktikum.tk" : "http://praktikum.tk";
 const api = new Api({
   baseUrl: `${API_URL}/cohort11`,
   headers: {
@@ -49,11 +49,14 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
+
 const popUpWindowImage = new PopupImage(document.querySelector("#image"));
+const popUpWindowLikes = new PopupLikes(document.querySelector("#likes"));
+const popUps = {popUpWindowImage, popUpWindowLikes}
 const cardList = new CardList(
   document.querySelector(".places-list"),
   templateCard,
-  popUpWindowImage,
+  popUps,
   createNewCard,
   api
 );
@@ -71,8 +74,8 @@ const formValidatorEdit = new FormValidator(popUpEdit);
 const formValidatorAvatar = new FormValidator(popUpAvatar);
 
 //Функция колбэк для создания карточки
-function createNewCard(data, popupCard, template, api) {
-  const card = new Card(data, popupCard, api);
+function createNewCard(data, popUps, template, api) {
+  const card = new Card(data, popUps, api);
   return card.createCard(template);
 }
 
@@ -169,6 +172,12 @@ avatarButton.addEventListener("click", () => {
   formValidatorAvatar.resetInvalidState();
   formValidatorAvatar.setSubmitButtonState(false);
 });
+
+// document.addEventListener('keydown', (event) => {
+//   if ( event.keyCode === 27) {
+//     document.querySelector('.popup').close()
+//   }
+// })
 
 //Вызовы методов
 api

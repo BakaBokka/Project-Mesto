@@ -11,6 +11,9 @@
 @import url(./__image-content/popup__image-content.css);
 @import url(./__error-message/popup__error-message.css);
 @import url(./__input-container/popup__input-container.css);
+@import url(./__likes-content/popup__likes-content.css);
+@import url(./__likes/popup__likes.css);
+
 
 
 .popup {
