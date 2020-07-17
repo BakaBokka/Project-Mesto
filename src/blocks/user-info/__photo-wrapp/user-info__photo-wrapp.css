@@ -1,0 +1,7 @@
+.user-info__photo-wrapp {
+  width: 150px;
+  height: 150px;
+  min-width: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+}

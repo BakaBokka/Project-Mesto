@@ -4,7 +4,7 @@ import { CardList } from "./CardList";
 import { FormValidator } from "./FormValidation";
 import { Popup } from "./Popup";
 import { PopupImage } from "./PopupImage";
-import { PopupLikes} from "./PopupLikes";
+import { PopupLikes } from "./PopupLikes";
 import { UserInfo } from "./UserInfo";
 import "../pages/index.css";
 
@@ -52,7 +52,7 @@ const api = new Api({
 
 const popUpWindowImage = new PopupImage(document.querySelector("#image"));
 const popUpWindowLikes = new PopupLikes(document.querySelector("#likes"));
-const popUps = {popUpWindowImage, popUpWindowLikes}
+const popUps = { popUpWindowImage, popUpWindowLikes };
 const cardList = new CardList(
   document.querySelector(".places-list"),
   templateCard,
@@ -172,12 +172,6 @@ avatarButton.addEventListener("click", () => {
   formValidatorAvatar.resetInvalidState();
   formValidatorAvatar.setSubmitButtonState(false);
 });
-
-// document.addEventListener('keydown', (event) => {
-//   if ( event.keyCode === 27) {
-//     document.querySelector('.popup').close()
-//   }
-// })
 
 //Вызовы методов
 api

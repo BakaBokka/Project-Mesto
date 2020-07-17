@@ -28,7 +28,7 @@ export class Popup {
       });
 
     document.addEventListener("keydown", (event) => {
-      if (event.keyCode === 27) {
+      if (event.keyCode == 27) {
         this.close();
       }
     });
