@@ -1,8 +1,7 @@
-
 "use strict";
 export class Card {
-  constructor(data, popupCard, api) {
-    this.popupCard = popupCard;
+  constructor(data, popUps, api) {
+    this.popUps = popUps;
     this.api = api;
     this.data = data;
   }
@@ -18,6 +17,10 @@ export class Card {
     this.likeIcon = this.placeCard.querySelector(".place-card__like-icon");
     this.deleteIcon = this.placeCard.querySelector(".place-card__delete-icon");
     this.cardImage = this.placeCard.querySelector(".place-card__image");
+    this.likeCounter = this.placeCard.querySelector(
+      ".place-card__like-counter"
+    );
+
     this.setEventListeners();
     this.showDeleteIcon();
     this.showlikeCount(this.data.likes);
@@ -83,9 +86,9 @@ export class Card {
     event.stopPropagation();
   };
 
-  //Методе открывает поп-ап картинки
+  //Метод открывает поп-ап картинки
   openImage = (event) => {
-    this.popupCard.open(this.data.link);
+    this.popUps.popUpWindowImage.open(this.data.link);
     event.stopPropagation();
   };
 
@@ -98,22 +101,29 @@ export class Card {
 
   //Метод показывает количество лайков
   showlikeCount = (array) => {
-    this.placeCard.querySelector(".place-card__like-counter").textContent =
-      array.length;
+    this.likeCounter.textContent = array.length;
   };
 
+  showLikeList = () => {
+    const likes = this.data.likes.map((item, index) => {
+      return `${index + 1}` + ". " + item.name;
+    });
 
-  // showWhoLikes = (array) => {
-  //   this.data.likes.
-  // }
+    this.popUps.popUpWindowLikes.open(likes);
+  };
+
+  closeLikeList = () => {
+    this.popUps.popUpWindowLikes.close();
+  };
 
   setEventListeners() {
     this.likeIcon.addEventListener("click", this.like);
-    this.likeIcon.addEventListener('mouseover', this.showWhoLikes);
 
     this.deleteIcon.addEventListener("click", this.remove);
 
     this.cardImage.addEventListener("click", this.openImage);
+    this.likeCounter.addEventListener("mouseenter", this.showLikeList);
+    this.likeCounter.addEventListener("mouseleave", this.closeLikeList);
   }
 
   removeEventListeners() {
@@ -121,5 +131,7 @@ export class Card {
     this.likeIcon.removeEventListener("click", this.like);
 
     this.cardImage.removeEventListener("click", this.openImage);
+    this.likeCounter.removeEventListener("mouseenter", this.showLikeList);
+    this.likeCounter.removeEventListener("mouseleave", this.closeLikeList);
   }
 }

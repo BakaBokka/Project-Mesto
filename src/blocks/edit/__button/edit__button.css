@@ -6,14 +6,6 @@
   line-height: 15px;
 }
 
-.edit__button:hover {
-  background-color: #fff;
-  color: #000;
-}
-
-.edit__button:active {
-  background-color: gray;
-}
 
 @media screen and (max-width: 980px) {
   .edit__button {

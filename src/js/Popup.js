@@ -26,5 +26,11 @@ export class Popup {
           this.form.reset();
         }
       });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.keyCode == 27) {
+        this.close();
+      }
+    });
   };
 }

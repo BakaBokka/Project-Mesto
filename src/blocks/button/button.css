@@ -7,8 +7,18 @@
   font-size: 30px;
   display: block;
   cursor: pointer;
+  transition: 1s;
 }
 
 .button:focus {
   outline-color: greenyellow;
+}
+
+.button:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.button:active {
+  background-color: gray;
 }
