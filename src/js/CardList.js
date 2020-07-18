@@ -20,9 +20,10 @@ export class CardList {
   //Метод проходит по массиву и добавляет карточки в общую обёртку
   render = (array) => {
     array.forEach((item) => {
-      //  if (item.owner._id === "3c7b1e670d15a41a86af9d64") {
+      // Раскомментировать if для показа только собственных карточек
+        //  if (item.owner._id === "3c7b1e670d15a41a86af9d64") {
         this.addCard(item.name, item.link, item._id, item.owner, item.likes);
-      //  }
+        //  }
     });
   };
 }
