@@ -37,7 +37,7 @@ export class Card {
         .then((res) => {
           this.likeIcon.classList.remove("place-card__like-icon_liked");
           this.showlikeCount(res.likes);
-          console.log(res.likes);
+          
         })
 
         .catch((error) => {
@@ -51,7 +51,7 @@ export class Card {
         .then((res) => {
           this.likeIcon.classList.add("place-card__like-icon_liked");
           this.showlikeCount(res.likes);
-          console.log(res.likes);
+          
         })
 
         .catch((error) => {
@@ -104,6 +104,7 @@ export class Card {
     this.likeCounter.textContent = array.length;
   };
 
+  //Метод показывает список лайков
   showLikeList = () => {
     const likes = this.data.likes.map((item, index) => {
       return `${index + 1}` + ". " + item.name;

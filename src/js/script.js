@@ -6,6 +6,7 @@ import { Popup } from "./Popup";
 import { PopupImage } from "./PopupImage";
 import { PopupLikes } from "./PopupLikes";
 import { UserInfo } from "./UserInfo";
+import { DragAndDrop } from "./DragAndDrop";
 import "../pages/index.css";
 
 ("use strict");
@@ -73,25 +74,13 @@ const popUpWindowAvatar = new Popup(document.querySelector("#avatar"));
 const formValidator = new FormValidator(popUpForm);
 const formValidatorEdit = new FormValidator(popUpEdit);
 const formValidatorAvatar = new FormValidator(popUpAvatar);
+const dragAndDrop = new DragAndDrop(placesList);
 
 //Функция колбэк для создания карточки
 function createNewCard(data, popUps, template, api) {
   const card = new Card(data, popUps, api);
   return card.createCard(template);
 }
-
-//Функция определяет следующий элемента для Drug&Drop
-const getNextCard = (cursorPosition, currentCard) => {
-  const currentCardCoord = currentCard.getBoundingClientRect();
-  const currentCardCenter = currentCardCoord.x + currentCardCoord.width / 2;
-
-  const nextCard =
-    cursorPosition < currentCardCenter
-      ? currentCard
-      : currentCard.nextElementSibling;
-  console.log(nextCard);
-  return nextCard;
-};
 
 //Слушатели
 
@@ -187,41 +176,6 @@ avatarButton.addEventListener("click", () => {
   formValidatorAvatar.setSubmitButtonState(false);
 });
 
-placesList.addEventListener("dragstart", (event) => {
-  event.target.classList.add("selected");
-});
-
-placesList.addEventListener("dragend", (event) => {
-  event.target.classList.remove("selected");
-});
-
-placesList.addEventListener("dragover", (event) => {
-  event.preventDefault();
-
-  const activeCard = placesList.querySelector(".selected");
-
-  const currentCard = event.target.parentNode;
-  console.log(currentCard.nextElementSibling);
-
-  const isMoveable =
-    activeCard !== currentCard && currentCard.classList.contains("place-card");
-
-  if (!isMoveable) {
-    return;
-  }
-
-  const nextCard = getNextCard(event.clientX, currentCard);
-
-  if (
-    (nextCard && activeCard === nextCard.previousElementSibling) ||
-    activeCard === nextCard
-  ) {
-    return;
-  }
-
-  placesList.insertBefore(activeCard, nextCard);
-});
-
 //Вызовы методов
 api
   .getUserInfo()
@@ -252,3 +206,4 @@ popUpWindowAvatar.setEventListeners();
 formValidatorEdit.setValidationEventListeners();
 formValidator.setValidationEventListeners();
 formValidatorAvatar.setValidationEventListeners();
+dragAndDrop.setEventListeners();
