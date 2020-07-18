@@ -16,6 +16,7 @@ const userData = document.querySelector(".user-info");
 const userInfoName = document.querySelector(".user-info__name");
 const userInfoJob = document.querySelector(".user-info__job");
 const userPhoto = document.querySelector(".user-info__photo");
+const placesList = document.querySelector(".places-list");
 
 //Переменные для формы Новая карточка
 const popUpForm = document.querySelector("#new-form");
@@ -54,7 +55,7 @@ const popUpWindowImage = new PopupImage(document.querySelector("#image"));
 const popUpWindowLikes = new PopupLikes(document.querySelector("#likes"));
 const popUps = { popUpWindowImage, popUpWindowLikes };
 const cardList = new CardList(
-  document.querySelector(".places-list"),
+  placesList,
   templateCard,
   popUps,
   createNewCard,
@@ -78,6 +79,19 @@ function createNewCard(data, popUps, template, api) {
   const card = new Card(data, popUps, api);
   return card.createCard(template);
 }
+
+//Функция определяет следующий элемента для Drug&Drop
+const getNextCard = (cursorPosition, currentCard) => {
+  const currentCardCoord = currentCard.getBoundingClientRect();
+  const currentCardCenter = currentCardCoord.x + currentCardCoord.width / 2;
+
+  const nextCard =
+    cursorPosition < currentCardCenter
+      ? currentCard
+      : currentCard.nextElementSibling;
+  console.log(nextCard);
+  return nextCard;
+};
 
 //Слушатели
 
@@ -171,6 +185,41 @@ avatarButton.addEventListener("click", () => {
   popUpWindowAvatar.open();
   formValidatorAvatar.resetInvalidState();
   formValidatorAvatar.setSubmitButtonState(false);
+});
+
+placesList.addEventListener("dragstart", (event) => {
+  event.target.classList.add("selected");
+});
+
+placesList.addEventListener("dragend", (event) => {
+  event.target.classList.remove("selected");
+});
+
+placesList.addEventListener("dragover", (event) => {
+  event.preventDefault();
+
+  const activeCard = placesList.querySelector(".selected");
+
+  const currentCard = event.target.parentNode;
+  console.log(currentCard.nextElementSibling);
+
+  const isMoveable =
+    activeCard !== currentCard && currentCard.classList.contains("place-card");
+
+  if (!isMoveable) {
+    return;
+  }
+
+  const nextCard = getNextCard(event.clientX, currentCard);
+
+  if (
+    (nextCard && activeCard === nextCard.previousElementSibling) ||
+    activeCard === nextCard
+  ) {
+    return;
+  }
+
+  placesList.insertBefore(activeCard, nextCard);
 });
 
 //Вызовы методов

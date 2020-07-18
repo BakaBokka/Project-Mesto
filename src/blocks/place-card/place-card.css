@@ -6,10 +6,12 @@
 @import url(./__like-wrap/place-card__like-wrap.css);
 @import url(./__like-icon/place-card__like-icon.css);
 @import url(./__like-counter/place-card__like-counter.css);
+@import url(./_selected/place-card_selected.css);
 
 .place-card {
   width: 282px;
   background-color: #fff;
   border-radius: 10px;
   min-height: 360px;
+  cursor: move;
 }
