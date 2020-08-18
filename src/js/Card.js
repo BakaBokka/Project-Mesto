@@ -9,6 +9,7 @@ export class Card {
   //Метод собирает карточку по темплейту
   createCard(template) {
     const newCard = template.cloneNode(true);
+
     newCard.querySelector(".place-card__name").textContent = this.data.name;
     newCard.querySelector(
       ".place-card__image"
@@ -37,7 +38,6 @@ export class Card {
         .then((res) => {
           this.likeIcon.classList.remove("place-card__like-icon_liked");
           this.showlikeCount(res.likes);
-          
         })
 
         .catch((error) => {
@@ -51,7 +51,6 @@ export class Card {
         .then((res) => {
           this.likeIcon.classList.add("place-card__like-icon_liked");
           this.showlikeCount(res.likes);
-          
         })
 
         .catch((error) => {
@@ -76,6 +75,7 @@ export class Card {
   remove = (event) => {
     if (window.confirm("Не надо, пожалуйста!")) {
       this.removeEventListeners();
+
       this.api.deleteCard(this.data.id).catch((error) => {
         console.log("Произошла ужасная ошбика:", error);
         return Promise.reject("Произошла ужасная ошбика:", error);

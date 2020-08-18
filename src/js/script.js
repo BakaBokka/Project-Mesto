@@ -43,7 +43,7 @@ const avatarButton = document.querySelector(".user-info__photo");
 
 //Переменные для классов
 const API_URL =
-  NODE_ENV === "production" ? "https://praktikum.tk" : "http://praktikum.tk";
+  NODE_ENV === "production" ? " https://nomoreparties.co" : " http://nomoreparties.co";
 const api = new Api({
   baseUrl: `${API_URL}/cohort11`,
   headers: {
@@ -54,7 +54,8 @@ const api = new Api({
 
 const popUpWindowImage = new PopupImage(document.querySelector("#image"));
 const popUpWindowLikes = new PopupLikes(document.querySelector("#likes"));
-const popUps = { popUpWindowImage, popUpWindowLikes };
+const dragAndDrop = new DragAndDrop(placesList);
+const popUps = { popUpWindowImage, popUpWindowLikes, dragAndDrop };
 const cardList = new CardList(
   placesList,
   templateCard,
@@ -74,7 +75,7 @@ const popUpWindowAvatar = new Popup(document.querySelector("#avatar"));
 const formValidator = new FormValidator(popUpForm);
 const formValidatorEdit = new FormValidator(popUpEdit);
 const formValidatorAvatar = new FormValidator(popUpAvatar);
-const dragAndDrop = new DragAndDrop(placesList);
+
 
 //Функция колбэк для создания карточки
 function createNewCard(data, popUps, template, api) {
@@ -85,8 +86,10 @@ function createNewCard(data, popUps, template, api) {
 //Слушатели
 
 popUpForm.addEventListener("submit", function (event) {
+
   submitForm.textContent = "Загрузка...";
   submitForm.classList.add("popup__button_font");
+
   api
     .postCard(name, link)
     .then((res) => {
@@ -101,8 +104,8 @@ popUpForm.addEventListener("submit", function (event) {
       return Promise.reject("Произошла ужасная ошбика:", error);
     })
     .finally(() => {
-      submitForm.textContent = "+";
       submitForm.classList.remove("popup__button_font");
+      submitForm.textContent = "+";
       formValidator.setSubmitButtonState(false);
     });
   event.preventDefault();

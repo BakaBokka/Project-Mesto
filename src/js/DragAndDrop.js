@@ -5,7 +5,7 @@ export class DragAndDrop {
     this.card = this.cardList.querySelector('.place-card');
   }
 
-  
+
 
   //Метод определяет следующий элемента для Drug&Drop
   getNextCard = (cursorPosition, currentCard) => {
@@ -71,4 +71,6 @@ export class DragAndDrop {
 
     this.cardList.addEventListener("dragover", this.dragAndDropCard);
   };
+
+
 }
