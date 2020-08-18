@@ -4,6 +4,7 @@ export class FormValidator {
   constructor(form) {
     this.form = form;
     this.submitButton = this.form.querySelector(".popup__button");
+    
   }
 
   isFieldValid = (input) => {
